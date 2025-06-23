@@ -24,11 +24,11 @@ const SignUp = () => {
     const [password, setPassword] = useState<string>("");
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-background">
-            <div className="flex-col rounded  w-4/5 h-4/5">
-                    <StarsFieldProvider text="Seja bem Vindo ao Starfield!" stars={50}/>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-background">
+            <div className="flex-col rounded  w-4/5 h-full">
+                    <StarsFieldProvider text="Seja bem Vindo ao Starsfield!" stars={50}/>
                     <div className="flex flex-col items-center justify-center min-h-1/2 w-full bg-fuchsia-100 rounded-b shadow-2xl">
-                        <h1 className="mt-2.5 font-title w-full text-surface z-2 uppercase text-3xl text-center m-6 mt-4 sm:text-4xl md:text-5xl">Cadastre-se</h1>
+                        <h1 className="font-title w-full text-surface z-2 uppercase text-3xl text-center m-6 mt-4 sm:text-4xl md:text-5xl">Cadastre-se</h1>
                         <Input
                             type="text"
                             placeholder="Username"

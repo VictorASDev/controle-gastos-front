@@ -7,7 +7,7 @@ interface ButtonProps {
 const Button = (props: ButtonProps) => {
   return (
     <button
-      className={`bg-surface text-white text-2xl font-bold py-4 px-6 rounded-xl ` + props.className}
+      className={`bg-surface text-white text-2xl font-bold py-4 px-6 rounded-xl cursor-pointer ` + props.className}
       onClick={props.onClick}
     >
       {props.text}

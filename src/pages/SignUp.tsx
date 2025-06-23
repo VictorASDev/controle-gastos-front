@@ -1,6 +1,5 @@
 import Button from "../components/Button";
 import Input from "../components/Input";
-import StarField from "../components/StarsField";
 import { Link } from "react-router-dom";
 import signup from "../services/signup";
 import { useState } from "react";
@@ -14,7 +13,7 @@ const SignUp = () => {
     function handleSubmit(name: string, password: string) {
         signup(name, password).then(() => {
             alert("Cadastro realizado com sucesso!");
-        }).catch((error) => {
+        }).catch(() => {
             setIsModalOpen(true);
         });
 

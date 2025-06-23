@@ -1,67 +1,69 @@
+import Button from "../components/Button";
+import Input from "../components/Input";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import ErrorModal from "../components/modal/ErrorModal";
+import StarsFieldProvider from "../components/section/StarsFieldProvider";
 import { login } from "../services/login";
-import { useNavigate } from "react-router-dom";
+
+
 
 const Login = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState<boolean | null>(false);
-    const navigate = useNavigate();
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+    async function handleSubmit (username: string, password: string) {
         try {
             const res = await login(username, password);
-            console.log("Token recebido:", res);
             sessionStorage.setItem("token", JSON.stringify(res.accessToken));
-            navigate("/home"); 
+            navigate("/profile"); 
         } catch (err) {
-            setError(true);
+            setIsModalOpen(true);
             console.error("Erro ao fazer login:", err);
         }
     };
 
-    return (
-        <div className="flex flex-col items-center justify-center h-screen bg-background">
-            <h1 className="text-4xl font-title uppercase mb-6">Login</h1>
-            <form className="bg-white p-8 rounded shadow-md w-96" onSubmit={handleSubmit}>
-                <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="username">Username</label>
-                    <input
-                        type="text"
-                        id="username"
-                        className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-500"
-                        required
-                        value={username}
-                        onChange={e => setUsername(e.target.value)}
-                    />
-                </div>
-                <div className="mb-6">
-                    <label className="block text-sm font-medium text-gray-700 mb-2" htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-500"
-                        required
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                </div>
-                <button
-                    type="submit"
-                    className="w-full bg-secondary text-white py-2 rounded hover:bg-accent transition duration-200 cursor-pointer"
-                >
-                    Login
-                </button>
-            </form>
+    const navigate = useNavigate();
 
-            {error && (
-                <div className="mt-4 text-red-500">
-                    Erro ao fazer login. Verifique suas credenciais.
-                </div>
-            )}
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [username, setUsername] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+
+    return (
+        <div className="flex items-center justify-center min-h-screen bg-background">
+            <div className="flex-col rounded  w-4/5 h-full">
+                    <StarsFieldProvider stars={50}/>
+                    <div className="flex flex-col items-center justify-center min-h-1/2 w-full bg-fuchsia-100 rounded-b shadow-2xl">
+                        <h1 className="font-title w-full text-surface z-2 uppercase text-3xl text-center m-6 mt-4 sm:text-4xl md:text-5xl">Login</h1>
+                        <Input
+                            type="text"
+                            placeholder="Username"
+                            onSubmit={setUsername}
+                            onChange={setUsername}
+                        />
+                        <Input 
+                            type="password"
+                            placeholder="Senha"
+                            onSubmit={setPassword}
+                            onChange={setPassword}
+                        />
+
+                        <div className="flex gap-1 text-xs text-surface font-text justify-start w-full px-6 sm:px-4 mt-2 mb-5 sm:w-2/3 md:1/3 lg:w-1/2">
+                            <p>Já possui uma conta?</p>
+                            <Link to="/login" className="underline hover:opacity-80 hover:text-accent transition duration-200 cursor-pointer ">
+                                Faça login
+                            </Link>
+                        </div>
+                        <Button text="concluir" className="m-5" onClick={() => handleSubmit(username, password)}/>
+                    </div>
+
+                {isModalOpen && (  
+                    <ErrorModal 
+                        message="Erro ao cadastrar usuário. Verifique suas credenciais."
+                        onClose={() => setIsModalOpen(false)}
+                    />
+                )}
+            </div>
         </div>
     );
-};
+}
 
 export default Login;

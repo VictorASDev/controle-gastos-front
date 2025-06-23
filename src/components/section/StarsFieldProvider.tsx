@@ -1,7 +1,7 @@
 import StarsField from "../StarsField";
 
 interface StarsFieldProviderProps {
-    text: string;
+    text?: string;
     stars: number;
 }
 

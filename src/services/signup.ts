@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:8080';
 
-export default function signup(username: string, password: string): Promise<void> {
+export const signup = (username: string, password: string): Promise<void> => {
     return axios.post(`${API_URL}/users`, {
         username,
         password

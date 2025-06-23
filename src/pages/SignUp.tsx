@@ -1,7 +1,7 @@
 import Button from "../components/Button";
 import Input from "../components/Input";
-import { Link } from "react-router-dom";
-import signup from "../services/signup";
+import { Link, useNavigate } from "react-router-dom";
+import { signup } from "../services/signup";
 import { useState } from "react";
 import ErrorModal from "../components/modal/ErrorModal";
 import StarsFieldProvider from "../components/section/StarsFieldProvider";
@@ -10,9 +10,9 @@ import StarsFieldProvider from "../components/section/StarsFieldProvider";
 
 const SignUp = () => {
 
-    function handleSubmit(name: string, password: string) {
-        signup(name, password).then(() => {
-            alert("Cadastro realizado com sucesso!");
+    async function handleSubmit(username: string, password: string) {
+        signup(username, password).then(() => {
+            navigate("/login");
         }).catch(() => {
             setIsModalOpen(true);
         });
@@ -22,9 +22,10 @@ const SignUp = () => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const navigate = useNavigate();
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-background">
+        <div className="flex items-center justify-center min-h-screen bg-background">
             <div className="flex-col rounded  w-4/5 h-full">
                     <StarsFieldProvider text="Seja bem Vindo ao Starsfield!" stars={50}/>
                     <div className="flex flex-col items-center justify-center min-h-1/2 w-full bg-fuchsia-100 rounded-b shadow-2xl">

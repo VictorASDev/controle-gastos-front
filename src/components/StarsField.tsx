@@ -1,8 +1,6 @@
-import React from 'react';
-
 const getRandom = (min:number, max:number) => Math.random() * (max - min) + min;
 
-function StarField({ count = 30 }) {
+function StarsField({ count = 30 }) {
   const stars = Array.from({ length: count }).map((_, i) => {
     const top = getRandom(0, 100);
     const left = getRandom(0, 100);
@@ -29,4 +27,4 @@ function StarField({ count = 30 }) {
   );
 }
 
-export default StarField;
+export default StarsField;

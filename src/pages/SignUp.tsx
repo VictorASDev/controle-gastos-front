@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import signup from "../services/signup";
 import { useState } from "react";
 import ErrorModal from "../components/modal/ErrorModal";
-import StarsFieldProvider from "../components/section/StarsFildProvider";
+import StarsFieldProvider from "../components/section/StarsFieldProvider";
 
 
 

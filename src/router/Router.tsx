@@ -7,10 +7,16 @@ import SignIn from '../pages/SignUp';
 
 const router = createBrowserRouter([
   {
-    path: '/home',
+    path: '/',
+    element: (
+        <Home />
+    )
+  },
+  {
+    path: '/profile',
     element:(
       <PrivateRoute>
-        <Home />,
+        <Profile />,
       </PrivateRoute>
     )
   },

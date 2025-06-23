@@ -20,7 +20,6 @@ const SignUp = () => {
 
     }  
 
-    const [error, setError] = useState<Boolean>(false);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");

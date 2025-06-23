@@ -5,7 +5,7 @@ export const getUser = async () => {
     if (!token) {
         throw new Error("User not authenticated");
     }
-    const response = await fetch(`${API_URL}/users`, {
+    await fetch(`${API_URL}/users`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

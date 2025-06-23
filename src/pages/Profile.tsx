@@ -1,4 +1,3 @@
-import Header from "../components/header/header";
 import { getPosts } from "../services/getPosts";
 import { useEffect, useState } from "react";
 

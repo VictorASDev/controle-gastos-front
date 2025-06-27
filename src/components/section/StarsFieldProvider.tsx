@@ -3,12 +3,13 @@ import StarsField from "../StarsField";
 interface StarsFieldProviderProps {
     text?: string;
     stars: number;
+    className?: string;
 }
 
 const StarsFieldProvider = (props: StarsFieldProviderProps) => {
     return (
         <div className="min-h-60 max-h-1/2 w-full bg-surface relative overflow-hidden flex items-center justify-center">
-            <div className="w-full h-1/2 top-0 left-0 absolute z-1 wave bg-background -scale-y-100 shadow-2xl"></div>
+            <div className={`w-full h-1/2 top-0 left-0 absolute z-1 bg-background -scale-y-100 shadow-2xl ` + (props.className)}></div>
             <div className="w-full h-full absolute z-0">
                 <StarsField count={props.stars} />
             </div>

@@ -11,6 +11,9 @@ export const getPosts = async () => {
             Authorization: `Bearer ${JSON.parse(token)}`,
         },
     });
+    if (response.status === 401) {
+        throw new Error("Unauthorized access");
+    }
     if (!response.ok) {
         throw new Error("Failed to fetch posts");
     }

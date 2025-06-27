@@ -26,8 +26,8 @@ const SignUp = () => {
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-background">
-            <div className="flex-col rounded  w-4/5 h-full">
-                    <StarsFieldProvider text="Seja bem Vindo ao Starsfield!" stars={50}/>
+            <div className="flex-col rounded  w-11/12 h-full sm:w-4/6">
+                    <StarsFieldProvider text="Seja bem Vindo ao Starsfield!" stars={50} className="wave"/>
                     <div className="flex flex-col items-center justify-center min-h-1/2 w-full bg-fuchsia-100 rounded-b shadow-2xl">
                         <h1 className="font-title w-full text-surface z-2 uppercase text-3xl text-center m-6 mt-4 sm:text-4xl md:text-5xl">Cadastre-se</h1>
                         <Input

@@ -1,22 +1,32 @@
+import { useNavigate } from "react-router-dom";
+import Header from "../components/header/Header";
 import { getPosts } from "../services/getPosts";
 import { useEffect, useState } from "react";
 
 const Profile = () => {
+    const navigate = useNavigate();
     const [feed, setFeed] = useState<any[]>([]);
 
-    console.log("Estado atual do feed:", feed); // Isso será logado em cada renderização
-
     useEffect(() => {
-        getPosts().then((data) => {
-            console.log("Dados recebidos:", data);
-            setFeed(data.feedItens);
-            console.log("Dados completos recebidos:", JSON.stringify(data));
-        });
-    }, []); 
+        const fetchPosts = async () => {
+            try {
+                const data = await getPosts();
+                console.log("Posts fetched:", data);
+                setFeed(data.feedItens ?? []);
+            } catch (error) {
+                sessionStorage.removeItem("token");
+                setFeed([]);
+                console.error("Erro ao buscar posts:", error);
+                navigate("/login");
+            }
+        };
+        fetchPosts();
+    }, [navigate]);
 
     return (
         <div className="">
-            {feed.length == 0 ? (
+            <Header />
+            {feed.length === 0 ? (
                 <div className="text-center text-surface mt-10">Nenhum post encontrado.</div>
             ) : (
                 feed.map((post) => (

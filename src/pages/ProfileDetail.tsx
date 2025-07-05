@@ -216,7 +216,7 @@ const ProfileDetail = () => {
                                 {profileUser?.posts.slice().reverse().map((post) => (
                                     <Post key={post.tweetId} tweetId={post.tweetId} username={profileUser.username} 
                                     content={post.content} creation={post.creationTimeStamp} 
-                                    onClick={(e) => {
+                                    onClick={() => {
                                         console.log(post.creationTimeStamp)
                                     } } ></Post>
                                 ))}

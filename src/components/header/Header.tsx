@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import Dropdown from "../dropdown/Dropdown";
 import StarsFieldProvider from "../section/StarsFieldProvider";
 import { useState } from "react";

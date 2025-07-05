@@ -6,6 +6,7 @@ import { postFollow } from "../services/postFollow";
 import { getUser } from "../services/getUser";
 import { getProfile } from "../services/getProfile";
 import { unfollow } from "../services/unfollow";
+import Post from "../components/post/Post";
 
 const ProfileDetail = () => {
     const { username } = useParams<string>();
@@ -18,16 +19,13 @@ const ProfileDetail = () => {
     useEffect(() => {
         const fetchFollows = async () => {
             if (!profileUser?.username) {
-                setFollowing([]);
                 return;
             }
             try {
                 const data = await getFollows(profileUser.username);
                 console.log("follows fetched:", data);
-                setFollowing(data);
             } catch (error) {
                 sessionStorage.removeItem("token");
-                setFollowing([]);
                 console.error("Erro ao buscar seguidos:", error);
             }
         };
@@ -215,10 +213,12 @@ const ProfileDetail = () => {
                             <h3 className="text-lg font-medium text-gray-900 mb-4">Posts recentes</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 {/* Placeholder para posts */}
-                                {[1, 2, 3, 4, 5, 6].map((item) => (
-                                    <div key={item} className="h-48 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">
-                                        Post #{item}
-                                    </div>
+                                {profileUser?.posts.slice().reverse().map((post) => (
+                                    <Post key={post.tweetId} tweetId={post.tweetId} username={profileUser.username} 
+                                    content={post.content} creation={post.creationTimeStamp} 
+                                    onClick={(e) => {
+                                        console.log(post.creationTimeStamp)
+                                    } } ></Post>
                                 ))}
                             </div>
                         </div>

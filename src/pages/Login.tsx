@@ -1,5 +1,5 @@
 import Button from "../components/Button";
-import Input from "../components/Input";
+import Input from "../components/inputs/Input";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import ErrorModal from "../components/modal/ErrorModal";

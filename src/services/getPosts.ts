@@ -1,22 +1,22 @@
+import axios from "axios";
+
 export const getPosts = async () => {
     const API_URL = "http://localhost:8080";
     const token = sessionStorage.getItem("token");
     if (!token) {
         throw new Error("User not authenticated");
     }
-    const response = await fetch(`${API_URL}/feed`, {
-        method: "GET",
+    try {
+        const response = await axios.get(`${API_URL}/feed`, {
         headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${JSON.parse(token)}`,
-        },
+        }
     });
-    if (response.status === 401) {
-        throw new Error("Unauthorized access");
-    }
-    if (!response.ok) {
-        throw new Error("Failed to fetch posts");
+
+        return response.data;
+
+    } catch (err) {
+        throw err;
     }
 
-    return response.json();
 } 

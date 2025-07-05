@@ -19,7 +19,7 @@ const Input = (props: InputProps) => {
                     value={value}
                     onChange={e => {
                       setValue(e.target.value);
-                      props.onChange?.(e.target.value); // <-- Chama o onChange do pai, se existir
+                      props.onChange?.(e.target.value); 
                     }}
                     onSubmit={e => {
                         e.preventDefault();
